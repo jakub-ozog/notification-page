@@ -1,7 +1,9 @@
 //Breakpoints
-$Mobile: 375px;
-$Tablet: 1024px;
 $Desktop: 1440px;
+$Laptop: 1024px;
+$Tablet: 768px;
+$MobileL: 576px;
+$Mobile: 375px;
 
 //Colors
 $Red: hsl(1, 90%, 64%);
@@ -27,27 +29,68 @@ body {
   background: $Lightgrayishblue1;
 }
 
+.attribution {
+  text-align: center;
+  font-size: .75rem;
+  color: $Grayishblue;
+
+  @media (max-width: $Desktop) {
+    padding: 2rem 1rem;
+  }
+
+  @media (min-width: $Laptop) {
+    margin-top: -3rem;
+  }
+
+  a {
+    color: $Darkgrayishblue;
+  }
+}
+
 .container {
   max-width: $Desktop;
   width: 100%;
   margin: 0 auto;
 }
 
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  //Nest Hub dimensions
+  @media (max-width: $Laptop) and (max-height: $Laptop) {
+    height: unset;
+  }
+
+  @media (max-width: 1280px) and (max-height: 800px) {
+    height: 100%;
+  }
+}
+
 .card {
   width: 100%;
-  height: 100vh;
   display: flex;
   place-content: center;
   margin: 0 auto;
   padding: 3rem 3rem;
 
+  @media (max-width: $MobileL) {
+    padding: 0;
+    margin: 0;
+  }
+
   &__wrapper {
     width: 100%;
     height: 100%;
     max-width: 50rem;
-    max-height: 70rem;
     background: $White;
     border-radius: 25px 25px 25px 25px;
+
+    @media (max-width: $MobileL) {
+      border-radius: 0;
+    }
   }
 
   &__header {
@@ -55,6 +98,11 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 2rem 1.5rem;
+
+    @media (max-width: $MobileL) {
+      flex-direction: column;
+      gap: .5rem;
+    }
   }
 
   &__title {
@@ -63,6 +111,10 @@ body {
     font-size: 1.75rem;
     font-weight: 800;
     gap: .5rem;
+
+    @media (max-width: $Tablet) {
+      font-size: 1.5rem;
+    }
   }
 
   &__number {
@@ -76,12 +128,12 @@ body {
   &__mark {
     cursor: pointer;
     color: $Verydarkblue;
-    transition: ease-in-out .2s;
+    transition: ease-in-out .1s;
+
     &:hover {
       color: $Blue;
     }
   }
-
 
   &__postsWrapper {
     display: flex;
@@ -96,10 +148,6 @@ body {
     border-radius: 25px 25px 25px 25px;
     padding: 1rem 1rem;
 
-    &.-old {
-      background-color: $White;
-    }
-
     &.-new {
       background-color: $Verylightgrayishblue;
     }
@@ -113,12 +161,17 @@ body {
 
   &__description {
     width: 100%;
+
+    @media (max-width: $Tablet) {
+      font-size: .938rem;
+    }
   }
 
   &__userName {
+    cursor: pointer;
     font-weight: 600;
     color: $Verydarkblue;
-    transition: ease-in-out .2s;
+    transition: ease-in-out .1s;
 
     &:hover {
       color: $Blue;
@@ -126,8 +179,18 @@ body {
   }
 
   &__activity {
+    cursor: pointer;
     font-weight: 600;
     color: $Darkgrayishblue;
+    transition: ease-in-out .1s;
+
+    @media (max-width: $Tablet) {
+      font-size: .938rem;
+    }
+
+    &:hover {
+      color: $Blue;
+    }
 
     &.-blue {
       color: $Blue;
@@ -139,14 +202,16 @@ body {
       }
     }
 
-    &:after {
-      content: '';
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background-color: $Red;
-      border-radius: 100%;
-      margin-left: 1rem;
+    &.-newMarker {
+      &:after {
+        content: '';
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        background-color: $Red;
+        border-radius: 100%;
+        margin-left: .25rem;
+      }
     }
   }
 
@@ -155,16 +220,32 @@ body {
   }
 
   &__message {
+    cursor: pointer;
     margin-top: 1rem;
     margin-right: 2rem;
     padding: 1rem;
     border: 1px solid $Lightgrayishblue2;
-    border-radius: 5px
+    border-radius: 5px;
+    transition: ease-in-out .2s;
+
+    &:hover {
+      background-color: $Lightgrayishblue2;
+    }
   }
 
   &__postImg {
+    border: none;
+
     img {
+      cursor: pointer;
       width: 60%;
+      border: 2px solid transparent;
+      transition: .2s;
+
+      &:hover {
+        border: 2px solid $Lightgrayishblue2;
+        border-radius: 10px;
+      }
     }
   }
 }
